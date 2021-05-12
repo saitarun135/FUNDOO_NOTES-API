@@ -1,11 +1,13 @@
+
 @component('mail::message')
-# Introduction
-
-The body of your message.
-
-@component('mail::button', ['url' => 'http://localhost:4200/response-password-reset?token='.$token])
-Button Text
-@endcomponent
+Hai ,
+<br>
+{{$email}}
+<br>
+This is your resetToken
+{{$token}}
+<br>
+Do not share it with any one..!
 
 Thanks,<br>
 {{ config('app.name') }}
