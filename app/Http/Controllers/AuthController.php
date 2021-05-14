@@ -1,16 +1,24 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Notes;
 use Validator;
+use guard;
+use Tymon\JWTAuth\JWT;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Symfony\Component\Mime\Message;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Claims\Subject;
 use Exception;
+use App\Http\Controllers\PasswordResetRequestController;
+
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
+
 
 class AuthController extends Controller
 {
@@ -20,36 +28,92 @@ class AuthController extends Controller
      * It is a type of filtering mechanism. .
      * @return void
      */
+    
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
+   
+    public function register(Request $request)
+    {
+        $this->validate($request, [
+            'name'=>'required',
+            'email'=>'required|email|unique:users',
+            'password'=>'required'
+        ]);
 
+        $user = new User([
+            'name'=> $request->input('name'),
+            'email'=> $request->input('email'),
+            'password'=> bcrypt($request->input('password'))
+        ]);
+
+        $user->save();
+
+        return response()->json([
+            'message'=>'Successfully Created user'
+        ],201);
+    }
+    public function login(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return response()->json([
+                    'error' => 'Invalid Credentials'
+                ], 401);
+            }
+        } catch (JWTException $e) {
+            return response()->json([
+                'error' => 'Could not create token'
+            ], 500);
+        }
+        return response()->json([
+            'token' => $token
+        ], 200);
+    }
+    public function getUser(){
+        $user = auth('api')->user();
+        return response()->json(['user'=>$user], 201);
+    }
+
+
+
+ /* --------------------------------- previous code-----------------
     public function login(Request $request){
         //make The make method will return an instance of the class or interface you request.
         // Where you request to make an interface
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
+            
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);  //422 Unprocessable Entity
+            //422 Unprocessable Entity
+            return response()->json($validator->errors(), 422);              
         }
+        
         //The attempt method accepts an array of key / value pairs as its first argument. 
         //The values in the array will be used to find the user in your database table.
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
-        }
-
-        return $this->createNewToken($token);
+           
+        }   
+            return $this->createNewToken($token);
     }
-
-
+  
+    
     public function register(Request $request) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|between:2,15',
             'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'password' => 'required|string|confirmed|
+                           regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
         ]);
 
         if($validator->fails()){
@@ -67,11 +131,15 @@ class AuthController extends Controller
             'user' => $user
         ], 201);        //201-->request has been fullfilled
     }
-/*
-     public function refresh() {
-        return $this->createNewToken(auth()->refresh());
+    
+     public function logout() {
+        auth()->logout();
+        return response()->json(['message' => 'User successfully signed out']);
     }
-*/
+    
+    public function userProfile() {
+        return response()->json(auth()->user());
+    }
     
     protected function createNewToken($token){
         return response()->json([
@@ -84,5 +152,9 @@ class AuthController extends Controller
         ]);
     }
     
-  
+    protected function guard()
+    {
+        return Auth::guard();
+    }
+ */
 }
