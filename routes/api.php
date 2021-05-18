@@ -86,8 +86,13 @@ Route::put('/updatenote/{id}',[
 
 
 
+
+
+
 //Group-Routes
 Route::group(["middleware"=>['auth.jwt']],function(){
+    Route::get('/usr',[AuthController::class,"listUsers"]);
+   // Route::get("/users",[NotesController::class,"list"]);
     Route::get('displayNotes',[NotesController::class,'display_All']);
     Route::get('particularNote/{id}',[NotesController::class,'display_Note']);
     Route::post('createNote',[NotesController::class,'create_Note']);
