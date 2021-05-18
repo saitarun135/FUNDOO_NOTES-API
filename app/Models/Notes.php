@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Notes extends Model
 {
     use HasFactory;
+  //  protected $table="notes";
     protected $fillable=['title','body'];
     
     protected $hidden = [
@@ -44,4 +45,15 @@ class Notes extends Model
     {
         return $this->getKey();
     }
+   
+    
+    // inverse one to one
+    // public function user(){
+    //     return $this->belongsTo(User::class);
+    // }
+
+    //inverse one to many
+   public function user(){
+       return $this->belongsTo(User::class);
+   }
 }
