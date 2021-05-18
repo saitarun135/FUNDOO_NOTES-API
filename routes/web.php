@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\api\NotesController;
 
 
 /*
@@ -19,3 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::resource('device',NotesController::class);
+
+
+//practicing route for one to one and oneto many
+Route::get('/usr',[AuthController::class,"listUsers"]);
+//Route::get("/users",[NotesController::class,"list"]);
