@@ -17,6 +17,8 @@ use App\Http\Controllers\PasswordResetRequestController;
 
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Database\Eloquent\Model;
+
 
 
 
@@ -32,7 +34,18 @@ class AuthController extends Controller
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
-   
+    public function listUsers(){
+        // echo "All notes";     
+        // return Notes::all();
+        // return Notes::find(4)->user;
+        // return User::all();
+        // return User::find(30);
+        // return Notes::all();
+        // return User::find(32)->noteses;      //-->32 user id notes
+        // return Notes::all();                 //-->all notes
+        return Notes::find(5)->user;          //-->finfing user
+      
+    }
     public function register(Request $request)
     {
         $this->validate($request, [
@@ -78,12 +91,14 @@ class AuthController extends Controller
     }
     public function getUser(){
         $user = auth('api')->user();
+        auth()->id();
         return response()->json(['user'=>$user], 201);
+
     }
 
 
 
- /* --------------------------------- previous code-----------------
+ /* --------------------------------- previous code------------------------------
     public function login(Request $request){
         //make The make method will return an instance of the class or interface you request.
         // Where you request to make an interface
