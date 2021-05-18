@@ -6,13 +6,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use App\Models\Notes;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
+  //  protected $table="notes";
+
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +37,7 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
         'created_at',
         'updated_at',
-        'id'
+        
     ];
 
     /**
@@ -64,8 +66,27 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims() {
         return [];
     }
-       
+    
+  //  --newly added[one-one]
+    // public function notes(){
+    //     return $this->hasOne(Notes::class);
+    // }
+
+   
+    // // ont to many
+    // public function notes(){
+    //  return $this->hasMany(Notes::class,'user_id');
+    // }
+    
+    //one to one
+    public function note()
+    {
+        return $this->hasOne(Notes::class);
+    }
+
+    //one to many
+    public function noteses(){
+        return $this->hasMany(Notes::class);
+    }
+
 }
-/**
- * update,query,delete
- */
