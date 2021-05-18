@@ -18,9 +18,12 @@ class NotesController extends Controller
     
     public function display_All()
     {
+
         $notes=Notes::all();
-        return new NoteResource($notes);
-        //return Notes::find('id',5)->notes;
+        return User::find($notes->user_id=auth()->id())->noteses;  //finding based on id
+        //$note=new Notes();                //note obj
+        //return new NoteResource($notes);           it displays all users notes
+        // return User::find(7)->noteses;            it is hardcoded id
     }
 
     public function create_Note(Request $request)
@@ -40,7 +43,7 @@ class NotesController extends Controller
             return new NoteResource($note);
         else{
             return response()->json([
-                'error' => 'UnAuthorized'], 401);
+                'error' => 'UnAuthorized/invalid id'], 401);
                 //echo "unauthorized";
             }
     }
