@@ -56,4 +56,8 @@ class Notes extends Model
    public function user(){
        return $this->belongsTo(User::class);
    }
+   public function labels()
+   {
+       return $this->hasMany('App\Models\LabelsNotes', 'noteid');
+   }
 }

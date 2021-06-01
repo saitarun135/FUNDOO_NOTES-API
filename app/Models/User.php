@@ -67,16 +67,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
     
-  //  --newly added[one-one]
-    // public function notes(){
-    //     return $this->hasOne(Notes::class);
-    // }
-
-   
-    // // ont to many
-    // public function notes(){
-    //  return $this->hasMany(Notes::class,'user_id');
-    // }
+ 
     
     //one to one
     public function note()
