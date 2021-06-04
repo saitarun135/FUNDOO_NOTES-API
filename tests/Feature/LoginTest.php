@@ -49,6 +49,17 @@ class LoginTest extends TestCase
     }
    
    
+ /* 
+    * invalid credentials 
+    */
+    public function test_Login_Invalid_Credentials()
+    {
+        $response = $this->json('POST','/api/login',[
+            "email"=>"nikhil@gmail.com",
+            "password"=>"SAItarun1"
+        ]);
+        $response->assertStatus(401);
+    }
 
  
 
