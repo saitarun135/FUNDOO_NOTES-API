@@ -35,6 +35,21 @@ class LoginTest extends TestCase
         $response->assertStatus(422);
     }
 
-    
+    /* 
+    * valid user login it should return true
+    */
+
+    public function test_Login_ValidUser()
+    {
+        $response = $this->json('POST','/api/login',[
+            "email"=>"nikhil@gmail.com",
+            "password"=>"SAItarun*1"
+        ]);
+        $response->assertStatus(200);
+    }
+   
+   
+
+ 
 
 }
