@@ -19,10 +19,25 @@ class RegistrationTest extends TestCase
     public function test_validCredentials(){
         $response = $this->json('POST','/api/register',[
             "name"=>"saiTarun",
-            "email"=>"sai12345@gmail.com",
+            "email"=>"sai145@gmail.com",
             "password"=>"SAItarun*1",
             "password_confirmation"=>"SAItarun*1"
             ]);
             $response->assertStatus(201);
     }
+
+    /**
+     * invalid credentials 
+    */
+
+    public function test_InvalidCredentials(){
+        $response = $this->json('POST','/api/register',[
+            "name"=>"saiTarun",
+            "email"=>"sai15@gmail.com",
+            "password"=>"SAItarun*1",
+            "password_confirmation"=>"SAIta1"
+            ]);
+            $response->assertStatus(422);
+    }
+
 }
