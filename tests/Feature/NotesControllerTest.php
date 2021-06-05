@@ -53,8 +53,24 @@ class NotesControllerTest extends TestCase
          $response=$this->withHeaders([
              'Content-Type'=>'Application/json',
              'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg4NzAwNSwiZXhwIjoxNjIyODkwNjA2LCJuYmYiOjE2MjI4ODcwMDYsImp0aSI6Im90UWh2NzAwRU1VZ0EwMWkiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UsKdEv_5buj0qUdZS0kQffgaWSs_Fq56PLOsW5ZdfjE'
-            ])->json('DELETE','http://127.0.0.1:8000/api/deleteNote/17');
+        ])->json('DELETE','http://127.0.0.1:8000/api/deleteNote/17');
             $response->assertStatus(201)->assertExactJson(['message'=>'Deleted']);
      }
+
+    /**
+     *testing for the updating note 
+     *saitarun800@gmail.com
+    */ 
+
+    public function test_UpadteNotes_By_ID(){
+        $response=$this->withHeaders([
+            'Content-Type'=>'Application/json',
+            'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg4NzAwNSwiZXhwIjoxNjIyODkwNjA2LCJuYmYiOjE2MjI4ODcwMDYsImp0aSI6Im90UWh2NzAwRU1VZ0EwMWkiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UsKdEv_5buj0qUdZS0kQffgaWSs_Fq56PLOsW5ZdfjE'
+       ])->json('PUT','http://127.0.0.1:8000/api/updateNote/18',[
+           "title"=>"tarun-sai",
+           "body"=>"justnow-updated"
+       ]);
+        $response->assertStatus(200);
+    }
 
 }
