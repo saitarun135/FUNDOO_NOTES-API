@@ -15,7 +15,7 @@ class NotesControllerTest extends TestCase
     /**
      * testing valid user able to create Notes
      *
-     */
+    */
     public function test_NoteCreate()
     {
         $response = $this->withHeaders([
@@ -29,5 +29,17 @@ class NotesControllerTest extends TestCase
         ]);
      $response->assertStatus(201);
     }
-    
+
+    /**
+    * Testing for get Notes of a specific user
+    */
+    public function test_GetAllNotes(){
+        $response = $this->withHeaders([
+            'Content-Type' => 'Application/json',
+            'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg4NzAwNSwiZXhwIjoxNjIyODkwNjA2LCJuYmYiOjE2MjI4ODcwMDYsImp0aSI6Im90UWh2NzAwRU1VZ0EwMWkiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UsKdEv_5buj0qUdZS0kQffgaWSs_Fq56PLOsW5ZdfjE'
+        
+        ])->json('GET', '/api/displayNotes');
+        
+        $response->assertStatus(200)->assertSuccessful();
+    }
 }
