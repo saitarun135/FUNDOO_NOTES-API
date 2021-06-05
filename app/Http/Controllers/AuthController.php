@@ -49,22 +49,30 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $this->validate($request, [
-            'name'=>'required',
+            'name'=>'required|string|between:2,15',
             'email'=>'required|email|unique:users',
-            'password'=>'required'
-        ]);
+            'password'=>'required|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            // 'firstname'=>'required|string',
+            // 'lastname'=>'required|string',
+            // // 'name'=>'required|string|between:2,15',
+            // 'username'=>'required|email|unique:users',
+            // 'password'=>'required|confirmed|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            ]);
 
         $user = new User([
             'name'=> $request->input('name'),
             'email'=> $request->input('email'),
             'password'=> bcrypt($request->input('password'))
+            // 'firstname'=>$request->input('firstname'),
+            //     'lastname'=>$request->input('lastname'),
+            // 'username'=> $request->input('email'),
+            // // 'email'=> $request->input('email'),
+            // 'password'=> bcrypt($request->input('password'))
         ]);
-
+        
         $user->save();
-
-        return response()->json([
-            'message'=>'Successfully Created user'
-        ],201);
+        return response()->json(['message'=>'Successfully Created user'],201);
+    
     }
     public function login(Request $request)
     {
@@ -95,6 +103,11 @@ class AuthController extends Controller
         return response()->json(['user'=>$user], 201);
 
     }
+    // public function logout() {
+    //     auth()->logout();
+
+    //     return response()->json(['message' => 'User successfully signed out']);
+    // }
 
 
 

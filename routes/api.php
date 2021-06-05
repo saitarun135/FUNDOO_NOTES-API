@@ -9,6 +9,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\UpdatePwdController;
 use Illuminate\Auth\Events\Login;
+use App\Http\Controllers\Labelcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,10 +93,14 @@ Route::put('/updatenote/{id}',[
 //Group-Routes
 Route::group(["middleware"=>['auth.jwt']],function(){
     Route::get('/usr',[AuthController::class,"listUsers"]);
-   // Route::get("/users",[NotesController::class,"list"]);
-    Route::get('displayNotes',[NotesController::class,'display_All']);
+    //Route::get("/users",[NotesController::class,"list"]);
+    Route::get('displayNotes',[NotesController::class,'getNotes']);
     Route::get('particularNote/{id}',[NotesController::class,'display_Note']);
     Route::post('createNote',[NotesController::class,'create_Note']);
     Route::put('updateNote/{id}',[NotesController::class,'update_Note']);
     Route::delete('deleteNote/{id}',[NotesController::class,'delete_Note']);
+    Route::post('/makelabel', 'LabelController@makeLabel');
+    Route::post('/editlabel', 'LabelController@editLabel');
+    Route::post('/deletelabel', 'LabelController@deleteLabel');
+    Route::post('/addnotelabel', 'LabelController@addNoteLabel');
 });

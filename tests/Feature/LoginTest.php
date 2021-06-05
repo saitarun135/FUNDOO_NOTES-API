@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 
 class LoginTest extends TestCase
 {
-    private $user;
+   
     /**
      * A basic feature test example.
      *
@@ -25,7 +25,7 @@ class LoginTest extends TestCase
     }
     
     /*
-    *Guest user tries to login gives unprocessible entry
+    *Guest user(without credentials) tries to login gives unprocessible entry
     */
 
     public function test_Login_Guest()
@@ -47,12 +47,10 @@ class LoginTest extends TestCase
         ]);
         $response->assertStatus(200);
     }
-   
-   
- /* 
+   /* 
     * invalid credentials 
     */
-    public function test_Login_Invalid_Credentials()
+    public function test_Login_With_Invalid_Credentials()
     {
         $response = $this->json('POST','/api/login',[
             "email"=>"nikhil@gmail.com",
@@ -60,7 +58,4 @@ class LoginTest extends TestCase
         ]);
         $response->assertStatus(401);
     }
-
- 
-
 }

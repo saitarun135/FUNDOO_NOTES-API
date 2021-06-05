@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Symfony\Component\Mime\Message;
+
 
 class PasswordResetRequestController extends Controller
 {
@@ -20,6 +22,7 @@ class PasswordResetRequestController extends Controller
         }
         $this->send($request->email);  //this is a function to send mail 
         return $this->successResponse();
+       
     }
     //this is a function to send mail 
     public function send($email)  
@@ -63,8 +66,10 @@ class PasswordResetRequestController extends Controller
 
     public function successResponse()
     {
+      
         return response()->json([
             'data' => 'Reset link is send successfully, please check your inbox.'
         ], Response::HTTP_OK);
+
     }
 }
