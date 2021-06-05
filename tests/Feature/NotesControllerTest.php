@@ -33,6 +33,7 @@ class NotesControllerTest extends TestCase
     /**
     * Testing for get Notes of a specific user
     */
+    
     public function test_GetAllNotes(){
         $response = $this->withHeaders([
             'Content-Type' => 'Application/json',
@@ -42,4 +43,18 @@ class NotesControllerTest extends TestCase
         
         $response->assertStatus(200)->assertSuccessful();
     }
+
+    /**
+    *Test case for deleting a note of a particular user 
+    * saitarun800@gmail.com
+    */
+    
+    public function test_deleteNotes(){
+         $response=$this->withHeaders([
+             'Content-Type'=>'Application/json',
+             'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg4NzAwNSwiZXhwIjoxNjIyODkwNjA2LCJuYmYiOjE2MjI4ODcwMDYsImp0aSI6Im90UWh2NzAwRU1VZ0EwMWkiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UsKdEv_5buj0qUdZS0kQffgaWSs_Fq56PLOsW5ZdfjE'
+            ])->json('DELETE','http://127.0.0.1:8000/api/deleteNote/17');
+            $response->assertStatus(201)->assertExactJson(['message'=>'Deleted']);
+     }
+
 }
