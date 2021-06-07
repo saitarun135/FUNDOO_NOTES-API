@@ -21,8 +21,7 @@ class NotesControllerTest extends TestCase
         $response = $this->withHeaders([
             'Content-Type' => 'Application/json',
             'Authorization'=>'Bearer 
-                              eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
-                              eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg3NDA4MSwiZXhwIjoxNjIyODc3NjgxLCJuYmYiOjE2MjI4NzQwODEsImp0aSI6ImM5Q1M0NGhNTUt6V2M4MVMiLCJzdWIiOjc4LCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.PqZsRD0H3johhpD_wD9spwmr0qDDJTcuDO9CmUYyVjI'
+            eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg5MjA0MywiZXhwIjoxNjIyODk1NjQ0LCJuYmYiOjE2MjI4OTIwNDQsImp0aSI6IjdUZGY3OVMxOHQxZDJGYTIiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UZoDqQk8Oxysi4fWVo0trMSyduX3GZDB_9k_9iO1OcY'
         ])->json('POST', '/api/createNote', [
             'title'=>'notes testing',
             'body'=>'writing test cases',
@@ -37,7 +36,7 @@ class NotesControllerTest extends TestCase
     public function test_GetAllNotes(){
         $response = $this->withHeaders([
             'Content-Type' => 'Application/json',
-            'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg4NzAwNSwiZXhwIjoxNjIyODkwNjA2LCJuYmYiOjE2MjI4ODcwMDYsImp0aSI6Im90UWh2NzAwRU1VZ0EwMWkiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UsKdEv_5buj0qUdZS0kQffgaWSs_Fq56PLOsW5ZdfjE'
+            'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg5MjA0MywiZXhwIjoxNjIyODk1NjQ0LCJuYmYiOjE2MjI4OTIwNDQsImp0aSI6IjdUZGY3OVMxOHQxZDJGYTIiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UZoDqQk8Oxysi4fWVo0trMSyduX3GZDB_9k_9iO1OcY'
         
         ])->json('GET', '/api/displayNotes');
         
@@ -52,8 +51,8 @@ class NotesControllerTest extends TestCase
     public function test_deleteNotes(){
          $response=$this->withHeaders([
              'Content-Type'=>'Application/json',
-             'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg4NzAwNSwiZXhwIjoxNjIyODkwNjA2LCJuYmYiOjE2MjI4ODcwMDYsImp0aSI6Im90UWh2NzAwRU1VZ0EwMWkiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UsKdEv_5buj0qUdZS0kQffgaWSs_Fq56PLOsW5ZdfjE'
-        ])->json('DELETE','http://127.0.0.1:8000/api/deleteNote/17');
+             'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg5MjA0MywiZXhwIjoxNjIyODk1NjQ0LCJuYmYiOjE2MjI4OTIwNDQsImp0aSI6IjdUZGY3OVMxOHQxZDJGYTIiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UZoDqQk8Oxysi4fWVo0trMSyduX3GZDB_9k_9iO1OcY'
+        ])->json('DELETE','http://127.0.0.1:8000/api/deleteNote/18');
             $response->assertStatus(201)->assertExactJson(['message'=>'Deleted']);
      }
 
@@ -65,8 +64,8 @@ class NotesControllerTest extends TestCase
     public function test_UpadteNotes_By_ID(){
         $response=$this->withHeaders([
             'Content-Type'=>'Application/json',
-            'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg4NzAwNSwiZXhwIjoxNjIyODkwNjA2LCJuYmYiOjE2MjI4ODcwMDYsImp0aSI6Im90UWh2NzAwRU1VZ0EwMWkiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UsKdEv_5buj0qUdZS0kQffgaWSs_Fq56PLOsW5ZdfjE'
-       ])->json('PUT','http://127.0.0.1:8000/api/updateNote/18',[
+            'Authorization'=>'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYyMjg5MjA0MywiZXhwIjoxNjIyODk1NjQ0LCJuYmYiOjE2MjI4OTIwNDQsImp0aSI6IjdUZGY3OVMxOHQxZDJGYTIiLCJzdWIiOjIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.UZoDqQk8Oxysi4fWVo0trMSyduX3GZDB_9k_9iO1OcY'
+       ])->json('PUT','http://127.0.0.1:8000/api/updateNote/19',[
            "title"=>"tarun-sai",
            "body"=>"justnow-updated"
        ]);
